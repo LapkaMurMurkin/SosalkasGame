@@ -23,9 +23,6 @@ namespace MyFirstVisualNovel.Runtime.Core.GameEntryPoint
                         builder.Register<VNGameplayState>(Lifetime.Singleton); */
 
 
-
-
-
             builder.Register<AssetStorage.AssetStorage>(Lifetime.Singleton);
             builder.Register<SceneLoader.SceneLoader>(Lifetime.Singleton);
             builder.Register<ActionMap>(Lifetime.Singleton);

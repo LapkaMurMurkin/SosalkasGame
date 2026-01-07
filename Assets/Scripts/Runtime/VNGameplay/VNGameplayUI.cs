@@ -1,3 +1,4 @@
+using SosalkasGame.Runtime.VNGameplay;
 using TMPro;
 
 using UnityEngine;
@@ -11,5 +12,14 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
         public RawImage CharacterImage;
         public TextMeshProUGUI CharacterName;
         public TextMeshProUGUI MainText;
+        public TMP_FontAsset CurrentFont;
+
+        public VNChoiceUI ChoiceMenu;
+
+        public void Initialize()
+        {
+            MainText.font = CurrentFont;
+            ChoiceMenu.Initialize();
+        }
     }
 }

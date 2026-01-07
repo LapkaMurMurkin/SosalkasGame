@@ -1,5 +1,5 @@
 using MyFirstVisualNovel.Runtime.Core.UI;
-
+using SosalkasGame.Runtime.Core.GameFSM;
 using Templates.FSM;
 using UnityEngine;
 using VContainer.Unity;
@@ -9,15 +9,21 @@ namespace MyFirstVisualNovel.Runtime.Core.GameFSM
     public class GameFSM : FSM, ITickable
     {
         private readonly ActionMap _actionMap;
-        public GameStateModel Model;
+        private readonly GameStateModel _model;
 
-        public GameFSM(ActionMap actionMap, UIRoot uiRoot, AssetStorage.AssetStorage assetStorage)
+        public GameFSM(ActionMap actionMap, UIRoot uiRoot, AssetStorage.AssetStorage assetStorage, SceneLoader.SceneLoader sceneLoader)
         {
             _actionMap = actionMap;
-            Model = new GameStateModel();
-            this.InitializeState(new MainMenuState());
-            this.InitializeState(new VNScenarioLoadingState(this, Model, uiRoot, _actionMap, assetStorage));
-            this.InitializeState(new VNGameplayState(this, Model, uiRoot, _actionMap, assetStorage));
+            _model = new GameStateModel();
+            _model.AssetStorage = assetStorage;
+            _model.ActionMap = actionMap;
+            _model.SceneLoader = sceneLoader;
+            _model.UIRoot = uiRoot;
+
+            this.InitializeState(new MainMenuState(this, _model));
+            this.InitializeState(new VNChoiceState(this, _model));
+            this.InitializeState(new VNScenarioLoadingState(this, _model));
+            this.InitializeState(new VNReadingState(this, _model));
         }
 
         public void Tick()

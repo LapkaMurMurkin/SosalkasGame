@@ -4,6 +4,7 @@ using MyFirstVisualNovel.Runtime.Core.AssetStorage;
 using MyFirstVisualNovel.Runtime.Core.GameFSM;
 using MyFirstVisualNovel.Runtime.Core.SceneLoader;
 using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core.GameFSM;
 
 using UnityEngine;
 
@@ -30,7 +31,11 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
         public void Initialize()
         {
             _vnGameplayUI = _assetStorage.InstantiateAsset<VNGameplayUI>(AssetID.VN_GAMEPLAY_UI);
+            _vnGameplayUI.Initialize();
             _uiRoot.AddScreen(_vnGameplayUI.gameObject);
+
+            _gameState.GetState<VNChoiceState>().ChoiceOptionsLoaded += _vnGameplayUI.ChoiceMenu.AddOptions;
+            _vnGameplayUI.ChoiceMenu.OptionSelected += _gameState.GetState<VNChoiceState>().MakeChoice;
 
             _gameState.SwitchStateTo<VNScenarioLoadingState>();
         }
@@ -38,6 +43,9 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
         public void Dispose()
         {
             MonoBehaviour.Destroy(_vnGameplayUI.gameObject);
+
+            _gameState.GetState<VNChoiceState>().ChoiceOptionsLoaded -= _vnGameplayUI.ChoiceMenu.AddOptions;
+            _vnGameplayUI.ChoiceMenu.OptionSelected -= _gameState.GetState<VNChoiceState>().MakeChoice;
         }
     }
 }

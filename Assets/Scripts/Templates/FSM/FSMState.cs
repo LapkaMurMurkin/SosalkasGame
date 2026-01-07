@@ -1,3 +1,5 @@
+using System;
+
 namespace Templates.FSM
 {
     public abstract class FSMState : IFSMState

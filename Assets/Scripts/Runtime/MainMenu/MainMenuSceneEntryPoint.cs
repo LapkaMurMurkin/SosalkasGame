@@ -18,7 +18,6 @@ namespace MyFirstVisualNovel.Runtime.MainMenu
         private GameFSM _gameState;
         private UIRoot _uiRoot;
         private MainMenuUI _mainMenuUI;
-        private MainMenu _mainMenu;
 
         public MainMenuSceneEntryPoint(AssetStorage assetStorage, SceneLoader sceneLoader, GameFSM gameState, UIRoot uiRoot)
         {
@@ -31,17 +30,15 @@ namespace MyFirstVisualNovel.Runtime.MainMenu
         public void Initialize()
         {
             _mainMenuUI = _assetStorage.InstantiateAsset<MainMenuUI>(AssetID.MAIN_MENU_UI);
+            _mainMenuUI.Initialize();
             _uiRoot.AddScreen(_mainMenuUI.gameObject);
-            _mainMenu = new MainMenu(_mainMenuUI, _sceneLoader, _gameState);
 
-            _mainMenu.Initialize();
-            Debug.Log("MainMenuScene - Initialize");
+            _gameState.SwitchStateTo<MainMenuState>();
         }
 
         public void Dispose()
         {
             MonoBehaviour.Destroy(_mainMenuUI.gameObject);
-            _mainMenu.Dispose();
             Debug.Log("MainMenuScene - Dispose");
         }
     }
