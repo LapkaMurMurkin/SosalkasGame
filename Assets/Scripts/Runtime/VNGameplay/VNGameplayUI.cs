@@ -1,3 +1,5 @@
+using MyFirstVisualNovel.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core.GameFSM;
 using SosalkasGame.Runtime.VNGameplay;
 using TMPro;
 
@@ -8,6 +10,9 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
 {
     public class VNGameplayUI : MonoBehaviour
     {
+        private GameStateModel _gameStateModel;
+        private VNFrame _loadedFrame;
+
         public RawImage BackgroundImage;
         public RawImage CharacterImage;
         public TextMeshProUGUI CharacterName;
@@ -16,10 +21,38 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
 
         public VNChoiceUI ChoiceMenu;
 
-        public void Initialize()
+        public void Initialize(GameStateModel gameStateModel)
         {
+            _gameStateModel = gameStateModel;
             MainText.font = CurrentFont;
             ChoiceMenu.Initialize();
+        }
+
+        public void Update()
+        {
+            //if(_gameState.CurrentState is VNInteractiveState)
+
+            if (_gameStateModel is null)
+                return;
+            if (_gameStateModel.Frames is null)
+                return;
+            if (_gameStateModel.CurrentFrame is null)
+                return;
+            if (_loadedFrame == _gameStateModel.CurrentFrame)
+                return;
+
+            ShowFrame(_gameStateModel.CurrentFrame);
+        }
+
+
+
+        public void ShowFrame(VNFrame frame)
+        {
+            _loadedFrame = frame;
+            BackgroundImage.texture = _gameStateModel.AssetStorage.GetAssetRef<Texture2D>(_loadedFrame.BackgroundImageID);
+            CharacterImage.texture = _gameStateModel.AssetStorage.GetAssetRef<Texture2D>(_loadedFrame.CharacterImageID);
+            CharacterName.text = _loadedFrame.CharacterNameID;
+            MainText.text = _loadedFrame.MainText;
         }
     }
 }

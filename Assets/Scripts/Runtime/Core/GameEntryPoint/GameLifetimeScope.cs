@@ -1,3 +1,4 @@
+using MyFirstVisualNovel.Runtime.Core.GameFSM;
 using MyFirstVisualNovel.Runtime.Core.UI;
 
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace MyFirstVisualNovel.Runtime.Core.GameEntryPoint
 
             //Core
             builder.RegisterEntryPoint<GameEntryPoint>();
+            builder.Register<GameStateModel>(Lifetime.Singleton);
             builder.Register<GameFSM.GameFSM>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             /*             builder.Register<MainMenuState>(Lifetime.Singleton);
                         builder.Register<VNScenarioLoadingState>(Lifetime.Singleton);

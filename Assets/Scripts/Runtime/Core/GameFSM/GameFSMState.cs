@@ -4,7 +4,7 @@ using Templates.FSM;
 
 namespace MyFirstVisualNovel.Runtime.Core.GameFSM
 {
-    public class GameFSMState : FSMState
+    public abstract class GameFSMState : FSMState
     {
         protected GameFSM _fsm;
         protected GameStateModel _model;

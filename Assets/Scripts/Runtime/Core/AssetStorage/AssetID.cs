@@ -10,5 +10,8 @@ namespace MyFirstVisualNovel.Runtime.Core.AssetStorage
         public const string UI_ROOT = "UIRoot";
         public const string MAIN_MENU_UI = "MainMenuUI";
         public const string VN_GAMEPLAY_UI = "VNGameplayUI";
+
+        //Interactive
+        public const string TEST_INTERACTIVE = "TestInteractive";
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Linq;
 using Cysharp.Threading.Tasks;
 
 using Extensions;
@@ -106,12 +106,14 @@ namespace MyFirstVisualNovel.Runtime.Core.GameFSM
                     anchors.Add(newFrame.AnchorID, frames.Count); // "frames.Count" it's frame index+1, before adding new frame
                 },
                 ["JUMP"] = (string value) => newFrame.JumpToAnchorID = value,
+                ["INTERACTIVE"] = (string value) => newFrame.Interactive = value.Split("\n"),
                 [">"] = (string value) =>
                 {
                     newFrame.MainText = value;
                     frames.Add(newFrame.Copy());
                     newFrame.Choice = null;
                     newFrame.JumpToAnchorID = null;
+                    newFrame.Interactive = null;
                 }
             };
 
@@ -163,11 +165,6 @@ namespace MyFirstVisualNovel.Runtime.Core.GameFSM
             }
 
             return result.ToArray();
-        }
-
-        private void AddNewFrame(VNFrame newFrame)
-        {
-
         }
     }
 }

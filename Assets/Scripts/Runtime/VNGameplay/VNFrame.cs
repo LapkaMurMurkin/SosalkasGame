@@ -9,6 +9,7 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
         public string[][] Choice;
         public string AnchorID;
         public string JumpToAnchorID;
+        public string[] Interactive;
 
         public VNFrame Copy()
         {
@@ -20,7 +21,8 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
                 Choice = this.Choice,
                 AnchorID = this.AnchorID,
                 JumpToAnchorID = this.JumpToAnchorID,
-                MainText = this.MainText
+                MainText = this.MainText,
+                Interactive = this.Interactive
             };
         }
     }
