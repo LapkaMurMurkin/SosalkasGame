@@ -10,7 +10,7 @@ using Extensions;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace MyFirstVisualNovel.Extensions
+namespace Extensions
 {
     public static class CSVLoader
     {

@@ -6,7 +6,6 @@ using Cysharp.Threading.Tasks;
 
 using Extensions;
 
-using MyFirstVisualNovel.Extensions;
 using MyFirstVisualNovel.Runtime.Core.UI;
 using MyFirstVisualNovel.Runtime.VNGameplay;
 

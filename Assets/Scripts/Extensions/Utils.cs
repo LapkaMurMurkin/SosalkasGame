@@ -13,6 +13,10 @@ namespace Extensions
 {
     public static class Utils
     {
+        public static IEnumerable<(int index, T item)> LoopIndex<T>(this IEnumerable<T> self) =>
+            self.Select((item, index) => (index, item));
+
+
         public static bool IsNullOrWhitespace(this string str)
         {
             if (!string.IsNullOrEmpty(str))

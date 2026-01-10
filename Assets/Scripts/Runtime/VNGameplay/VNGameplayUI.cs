@@ -1,3 +1,4 @@
+using Extensions;
 using MyFirstVisualNovel.Runtime.Core.GameFSM;
 using SosalkasGame.Runtime.Core.GameFSM;
 using SosalkasGame.Runtime.VNGameplay;
@@ -20,17 +21,20 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
         public TMP_FontAsset CurrentFont;
 
         public VNChoiceUI ChoiceMenu;
+        private TMPAnimation _tmpAnimation;
 
         public void Initialize(GameStateModel gameStateModel)
         {
             _gameStateModel = gameStateModel;
             MainText.font = CurrentFont;
             ChoiceMenu.Initialize();
+            _tmpAnimation = new TMPAnimation(MainText);
         }
 
         public void Update()
         {
             //if(_gameState.CurrentState is VNInteractiveState)
+            _tmpAnimation.Update();
 
             if (_gameStateModel is null)
                 return;
@@ -42,6 +46,7 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
                 return;
 
             ShowFrame(_gameStateModel.CurrentFrame);
+            _tmpAnimation.ForceTMPMeshUpdate();
         }
 
 

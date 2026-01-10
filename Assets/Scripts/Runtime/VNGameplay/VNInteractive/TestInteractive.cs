@@ -1,6 +1,6 @@
 using System;
+using Extensions;
 using SosalkasGame.Runtime.Core.GameFSM;
-using TestTaskQuizGame;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;

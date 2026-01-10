@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TestTaskQuizGame
+namespace Extensions
 {
     public static class DOTweenAnimator
     {
