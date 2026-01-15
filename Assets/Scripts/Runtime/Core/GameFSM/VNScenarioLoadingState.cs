@@ -6,14 +6,14 @@ using Cysharp.Threading.Tasks;
 
 using Extensions;
 
-using MyFirstVisualNovel.Runtime.Core.UI;
-using MyFirstVisualNovel.Runtime.VNGameplay;
+using SosalkasGame.Runtime.Core;
+using SosalkasGame.Runtime.VNGameplay;
 
 using UnityEngine;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameFSM
+namespace SosalkasGame.Runtime.Core.GameFSM
 {
-    public class VNScenarioLoadingState : GameFSMState
+    public class VNScenarioLoadingState : VNGameplayState
     {
         private UniTask<bool>.Awaiter _awaiter;
 
@@ -23,14 +23,14 @@ namespace MyFirstVisualNovel.Runtime.Core.GameFSM
 
         public override void Enter()
         {
-            this._model.UIRoot.ShowLoadingScreen();
+            //this._model.UIRoot.ShowLoadingScreen();
             _awaiter = LoadScenarioAsync(this._model.ScenarioConfigPath).GetAwaiter();
             Debug.LogWarning($"VNScenarioLoadingState: Enter");
         }
 
         public override void Exit()
         {
-            this._model.UIRoot.HideLoadingScreen();
+            //this._model.UIRoot.HideLoadingScreen();
             Debug.LogWarning($"VNScenarioLoadingState: Exit");
         }
 

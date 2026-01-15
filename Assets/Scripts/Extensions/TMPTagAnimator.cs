@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using SosalkasGame.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace Extensions
 {
-    public class TMPAnimation
+    public class TMPTagAnimator : IDisposable
     {
         private struct TMPAnimationTag
         {
@@ -33,103 +36,55 @@ namespace Extensions
             RegexOptions.Singleline
         );
 
-        private static Dictionary<string, Action<TMPAnimation, TMPAnimationTag>> _tagAnimation = new Dictionary<string, Action<TMPAnimation, TMPAnimationTag>>
+        private static Dictionary<string, Func<DOTweenTMPAnimator, TMPAnimationTag, Tween>> _tagAnimation = new()
         {
-            {"wave", (anim, tag) => anim.AnimateWave(tag) },
-            {"write", (anim, tag) => anim.AnimateWrite(tag) },
+            {"wave", (anim, tag) => anim.DOWave() },
+            {"write", (anim, tag) => anim.DOTypewriter() },
         };
 
-        private TMP_Text _textMesh;
-        private TMP_TextInfo _textInfo;
-        private TMPAnimationTag[] _tags;
-        private Mesh _meshCopy;
-        private Vector3[] _verticesOrig;
-        private Vector3[] _verticesCopy;
+        private TextMeshProUGUI _textElement;
+        private List<TMPAnimationTag> _tags;
+        private DOTweenTMPAnimator _doTweenTMPAnimator;
 
-        private float _writerProgress;
-
-        public TMPAnimation(TMP_Text tmpText)
+        public TMPTagAnimator(TextMeshProUGUI textElement)
         {
-            _textMesh = tmpText;
-            ForceTMPMeshUpdate();
+            _textElement = textElement;
+            _doTweenTMPAnimator = new DOTweenTMPAnimator(_textElement);
+
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Add(ReParseTags);
+
+            WaitAndDispose(textElement.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        public void ForceTMPMeshUpdate()
+        public void Dispose()
         {
-            string rawText = _textMesh.text;
-            _tags = ParseTags(rawText).ToArray();
-            _textMesh.text = _tagRegex.Replace(rawText, match => match.Groups["content"].Value);
-
-            _textMesh.ForceMeshUpdate();
-
-            _textInfo = _textMesh.textInfo;
-            _meshCopy = _textMesh.mesh;
-
-            _verticesOrig = _meshCopy.vertices;
-            _verticesCopy = new Vector3[_verticesOrig.Length];
-
-            _writerProgress = 0;
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(ReParseTags);
+            _doTweenTMPAnimator.Dispose();
         }
 
-        public void Update()
+        private async UniTaskVoid WaitAndDispose(System.Threading.CancellationToken token)
         {
-            _verticesOrig.CopyTo(_verticesCopy, 0);
-
-            foreach (TMPAnimationTag tag in _tags)
-                if (_tagAnimation.TryGetValue(tag.name, out var anim))
-                    anim(this, tag);
-
-            _meshCopy.vertices = _verticesCopy;
-            _textMesh.canvasRenderer.SetMesh(_meshCopy);
+            await UniTask.WaitUntilCanceled(token);
+            Dispose();
         }
 
-        private void AnimateWave(TMPAnimationTag tag)
+        private void ReParseTags(UnityEngine.Object obj)
         {
-            float waveHeight = 10f;
-            float waveSpeed = 2f;
-            float waveLength = 0.5f;
-
-            for (int i = tag.startIndex; i < tag.startIndex + tag.length; i++)
-            {
-                if (_textInfo.characterInfo[i].isVisible == false)
-                    continue;
-                int vertexIndex = _textInfo.characterInfo[i].vertexIndex;
-
-                Vector3 offset = Vector3.up * Mathf.Sin(Time.time * waveSpeed + i * waveLength) * waveHeight;
-
-                for (int j = 0; j < 4; j++)
-                    _verticesCopy[vertexIndex + j] += offset;
-                /*                 _verticesCopy[vertexIndex + 1] += offset;
-                                _verticesCopy[vertexIndex + 2] += offset;
-                                _verticesCopy[vertexIndex + 3] += offset; */
-            }
-        }
-
-        private void AnimateWrite(TMPAnimationTag tag)
-        {
-            float writerSpeed = 10f;
-
-            if (_writerProgress >= _textMesh.text.Length)
+            if (_textElement == null || obj != _textElement)
                 return;
 
-            _writerProgress += Time.deltaTime * writerSpeed;
-            int visibleCount = (int)_writerProgress;
-
-            for (int i = 0; i < _textMesh.text.Length; i++)
-            {
-                if (_textInfo.characterInfo[i].isVisible == false)
-                    continue;
-                int vertexIndex = _textInfo.characterInfo[i].vertexIndex;
-
-                Color32[] colors = _meshCopy.colors32;
-                byte alpha = (i < visibleCount) ? (byte)255 : (byte)0;
-
-                for (int j = 0; j < 4; j++)
-                    colors[vertexIndex + j].a = alpha;
-
-                _meshCopy.colors32 = colors;
-            }
+            _tags = ParseTags(_textElement.text);                 // парсинг тегов
+            ReApplayAnimations();
         }
+
+        public void ReApplayAnimations()
+        {
+            _doTweenTMPAnimator.KillAll(true);
+            foreach (TMPAnimationTag tag in _tags)
+                if (_tagAnimation.TryGetValue(tag.name, out var doAnim))
+                    doAnim(_doTweenTMPAnimator, tag);
+        }
+
 
         private List<TMPAnimationTag> ParseTags(string rawText)
         {
@@ -189,9 +144,5 @@ namespace Extensions
 
             return tags;
         }
-
-
     }
-
-
 }

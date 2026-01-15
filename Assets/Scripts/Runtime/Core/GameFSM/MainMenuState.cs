@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using MyFirstVisualNovel.Runtime.Core.SceneLoader;
-using MyFirstVisualNovel.Runtime.Core.UI;
-using MyFirstVisualNovel.Runtime.MainMenu;
+using SosalkasGame.Runtime.Core.SceneLoader;
+using SosalkasGame.Runtime.Core;
+using SosalkasGame.Runtime.MainMenu;
 using Templates.FSM;
 using UnityEngine;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameFSM
+namespace SosalkasGame.Runtime.Core.GameFSM
 {
     public class MainMenuState : GameFSMState
     {
@@ -36,7 +36,7 @@ namespace MyFirstVisualNovel.Runtime.Core.GameFSM
         private async void LoadGameplayScene()
         {
             this._model.ScenarioConfigPath = _scenarioPaths[_ui.ScenarioListDropdown.value];
-            await this._model.SceneLoader.LoadScene(SceneID.VN_GAMEPLAY);
+            await this._fsm.SceneLoader.LoadSceneAsync(SceneID.VN_GAMEPLAY);
         }
 
         private void PopulateScenarioList()

@@ -2,18 +2,18 @@ using System;
 
 using Cysharp.Threading.Tasks;
 
-using MyFirstVisualNovel.Runtime.Core.GameEntryPoint;
+using SosalkasGame.Runtime.Core.GameEntryPoint;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.Core.SceneLoader
+namespace SosalkasGame.Runtime.Core.SceneLoader
 {
     public class SceneLoader
     {
-        private GameLifetimeScope _gameLifetimeScope;
+        private readonly GameLifetimeScope _gameLifetimeScope;
         public Action LoadStart;
         public Action LoadEnd;
 
@@ -22,12 +22,12 @@ namespace MyFirstVisualNovel.Runtime.Core.SceneLoader
             _gameLifetimeScope = lifetimeScope;
         }
 
-        public async UniTask<Scene> LoadScene(string sceneName, LifetimeScope parentLifetimeScope = null)
+        public async UniTask<Scene> LoadSceneAsync(string sceneName, LifetimeScope reparentLifetimeScope = null)
         {
             LoadStart.Invoke();
 
             await SceneManager.LoadSceneAsync(SceneID.EMPTY);
-            using (LifetimeScope.EnqueueParent(parentLifetimeScope is null ? _gameLifetimeScope : parentLifetimeScope))
+            using (LifetimeScope.EnqueueParent(reparentLifetimeScope is null ? _gameLifetimeScope : reparentLifetimeScope))
                 await SceneManager.LoadSceneAsync(sceneName);
 
             LoadEnd.Invoke();

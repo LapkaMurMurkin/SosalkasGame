@@ -1,26 +1,25 @@
 using System;
 
-using MyFirstVisualNovel.Runtime.Core.AssetStorage;
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
-using MyFirstVisualNovel.Runtime.Core.SceneLoader;
-using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core.AssetStorage;
 using SosalkasGame.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core.SceneLoader;
+using SosalkasGame.Runtime.Core;
 using SosalkasGame.Runtime.VNGameplay.VNInteractive;
 
 using UnityEngine;
 
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.VNGameplay
+namespace SosalkasGame.Runtime.VNGameplay
 {
     public class VNGameplaySceneEntryPoint : IInitializable, IDisposable
     {
         private readonly GameStateModel _model;
-        private AssetStorage _assetStorage;
-        private SceneLoader _sceneLoader;
-        private GameFSM _gameState;
-        private UIRoot _uiRoot;
-        private VNGameplayUI _vnGameplayUI;
+        private readonly AssetStorage _assetStorage;
+        private readonly SceneLoader _sceneLoader;
+        private readonly GameFSM _gameState;
+        private readonly UIRoot _uiRoot;
+        private readonly VNGameplayUI _vnGameplayUI;
 
         public VNGameplaySceneEntryPoint(GameStateModel model, AssetStorage assetStorage, SceneLoader sceneLoader, GameFSM gameState, UIRoot uiRoot)
         {
@@ -29,16 +28,16 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
             _sceneLoader = sceneLoader;
             _gameState = gameState;
             _uiRoot = uiRoot;
+            _vnGameplayUI = _assetStorage.InstantiateAsset<VNGameplayUI>(AssetID.VN_GAMEPLAY_UI);
         }
 
         public void Initialize()
         {
-            _vnGameplayUI = _assetStorage.InstantiateAsset<VNGameplayUI>(AssetID.VN_GAMEPLAY_UI);
-            _vnGameplayUI.Initialize(_model);
+            _vnGameplayUI.Initialize(_model, _assetStorage);
             _uiRoot.AddScreen(_vnGameplayUI.gameObject);
 
             _gameState.GetState<VNChoiceState>().ChoiceOptionsLoaded += _vnGameplayUI.ChoiceMenu.AddOptions;
-            _gameState.GetState<VNInteractiveState>().InteractiveLoaded += AddInteractiveScreen;
+            //_gameState.GetState<VNInteractiveState>().InteractiveLoaded += AddInteractiveScreen;
             _vnGameplayUI.ChoiceMenu.OptionSelected += _gameState.GetState<VNChoiceState>().MakeChoice;
 
 
@@ -51,13 +50,13 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
             MonoBehaviour.Destroy(_vnGameplayUI.gameObject);
 
             _gameState.GetState<VNChoiceState>().ChoiceOptionsLoaded -= _vnGameplayUI.ChoiceMenu.AddOptions;
-            _gameState.GetState<VNInteractiveState>().InteractiveLoaded -= AddInteractiveScreen;
+            //_gameState.GetState<VNInteractiveState>().InteractiveLoaded -= AddInteractiveScreen;
             _vnGameplayUI.ChoiceMenu.OptionSelected -= _gameState.GetState<VNChoiceState>().MakeChoice;
         }
 
         private void AddInteractiveScreen(TestInteractive testInteractive)
         {
-            _uiRoot.AddScreen(testInteractive.gameObject);
+            //_uiRoot.AddScreen(testInteractive.gameObject);
         }
     }
 }

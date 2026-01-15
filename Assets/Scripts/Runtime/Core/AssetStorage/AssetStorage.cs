@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-namespace MyFirstVisualNovel.Runtime.Core.AssetStorage
+namespace SosalkasGame.Runtime.Core.AssetStorage
 {
     public class AssetStorage : IDisposable
     {

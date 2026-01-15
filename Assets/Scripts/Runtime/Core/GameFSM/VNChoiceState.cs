@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core.GameFSM;
 
 namespace SosalkasGame.Runtime.Core.GameFSM
 {
@@ -8,7 +8,7 @@ namespace SosalkasGame.Runtime.Core.GameFSM
     {
         public Action<string[][]> ChoiceOptionsLoaded;
 
-        public VNChoiceState(MyFirstVisualNovel.Runtime.Core.GameFSM.GameFSM fsm, GameStateModel model) : base(fsm, model)
+        public VNChoiceState(SosalkasGame.Runtime.Core.GameFSM.GameFSM fsm, GameStateModel model) : base(fsm, model)
         {
         }
 

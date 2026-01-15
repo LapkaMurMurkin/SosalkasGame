@@ -1,4 +1,4 @@
-namespace MyFirstVisualNovel.Runtime.Core.SceneLoader
+namespace SosalkasGame.Runtime.Core.SceneLoader
 {
     public static class SceneID
     {

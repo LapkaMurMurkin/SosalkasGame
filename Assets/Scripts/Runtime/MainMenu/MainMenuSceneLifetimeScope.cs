@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.MainMenu
+namespace SosalkasGame.Runtime.MainMenu
 {
     public class MainMenuSceneLifetimeScope : LifetimeScope
     {

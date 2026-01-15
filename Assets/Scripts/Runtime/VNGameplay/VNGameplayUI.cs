@@ -1,5 +1,5 @@
 using Extensions;
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core.AssetStorage;
 using SosalkasGame.Runtime.Core.GameFSM;
 using SosalkasGame.Runtime.VNGameplay;
 using TMPro;
@@ -7,11 +7,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MyFirstVisualNovel.Runtime.VNGameplay
+namespace SosalkasGame.Runtime.VNGameplay
 {
     public class VNGameplayUI : MonoBehaviour
     {
         private GameStateModel _gameStateModel;
+        private AssetStorage _assetStorage;
         private VNFrame _loadedFrame;
 
         public RawImage BackgroundImage;
@@ -21,21 +22,19 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
         public TMP_FontAsset CurrentFont;
 
         public VNChoiceUI ChoiceMenu;
-        private TMPAnimation _tmpAnimation;
+        private TMPTagAnimator _tmpTagAnimator;
 
-        public void Initialize(GameStateModel gameStateModel)
+        public void Initialize(GameStateModel gameStateModel, AssetStorage assetStorage)
         {
             _gameStateModel = gameStateModel;
+            _assetStorage = assetStorage;
             MainText.font = CurrentFont;
             ChoiceMenu.Initialize();
-            _tmpAnimation = new TMPAnimation(MainText);
+            _tmpTagAnimator = new TMPTagAnimator(MainText);
         }
 
         public void Update()
         {
-            //if(_gameState.CurrentState is VNInteractiveState)
-            _tmpAnimation.Update();
-
             if (_gameStateModel is null)
                 return;
             if (_gameStateModel.Frames is null)
@@ -46,16 +45,13 @@ namespace MyFirstVisualNovel.Runtime.VNGameplay
                 return;
 
             ShowFrame(_gameStateModel.CurrentFrame);
-            _tmpAnimation.ForceTMPMeshUpdate();
         }
-
-
 
         public void ShowFrame(VNFrame frame)
         {
             _loadedFrame = frame;
-            BackgroundImage.texture = _gameStateModel.AssetStorage.GetAssetRef<Texture2D>(_loadedFrame.BackgroundImageID);
-            CharacterImage.texture = _gameStateModel.AssetStorage.GetAssetRef<Texture2D>(_loadedFrame.CharacterImageID);
+            BackgroundImage.texture = _assetStorage.GetAssetRef<Texture2D>(_loadedFrame.BackgroundImageID);
+            CharacterImage.texture = _assetStorage.GetAssetRef<Texture2D>(_loadedFrame.CharacterImageID);
             CharacterName.text = _loadedFrame.CharacterNameID;
             MainText.text = _loadedFrame.MainText;
         }

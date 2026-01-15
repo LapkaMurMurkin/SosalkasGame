@@ -1,12 +1,12 @@
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
-using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core;
 
 using UnityEngine;
 
 using VContainer;
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameEntryPoint
+namespace SosalkasGame.Runtime.Core.GameEntryPoint
 {
     public class GameLifetimeScope : LifetimeScope
     {

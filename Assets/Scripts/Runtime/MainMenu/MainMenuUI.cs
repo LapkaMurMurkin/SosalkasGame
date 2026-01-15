@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MyFirstVisualNovel.Runtime.MainMenu
+namespace SosalkasGame.Runtime.MainMenu
 {
     public class MainMenuUI : MonoBehaviour
     {

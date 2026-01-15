@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.VNGameplay
+namespace SosalkasGame.Runtime.VNGameplay
 {
     public class VNGameplaySceneLifeTimeScope : LifetimeScope
     {

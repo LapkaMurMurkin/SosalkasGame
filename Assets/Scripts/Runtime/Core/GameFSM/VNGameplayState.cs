@@ -1,14 +1,14 @@
 using System.Linq;
 using Extensions;
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
-using MyFirstVisualNovel.Runtime.VNGameplay;
+using SosalkasGame.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.VNGameplay;
 using UnityEngine.InputSystem;
 
 namespace SosalkasGame.Runtime.Core.GameFSM
 {
     public abstract class VNGameplayState : GameFSMState
     {
-        protected VNGameplayState(MyFirstVisualNovel.Runtime.Core.GameFSM.GameFSM fsm, GameStateModel model) : base(fsm, model)
+        protected VNGameplayState(SosalkasGame.Runtime.Core.GameFSM.GameFSM fsm, GameStateModel model) : base(fsm, model)
         {
         }
 

@@ -1,26 +1,23 @@
+using Extensions;
+using SosalkasGame.Extensions;
 using TMPro;
 using UnityEngine;
 
 public class TestAnimation : MonoBehaviour
 {
     private float _writerProgress;
-    private TMP_Text _textMesh;
+    private TextMeshProUGUI _textMesh;
+    private TMPTagAnimator _animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _textMesh = GetComponent<TMP_Text>();
+        _textMesh = GetComponent<TextMeshProUGUI>();
+        _animator = new TMPTagAnimator(_textMesh);
     }
 
-    // Update is called once per frame
-    void Update()
+/*     private void OnDestroy()
     {
-        float writerSpeed = 2f;
-
-        if (_writerProgress >= _textMesh.text.Length)
-            return;
-
-        _writerProgress += Time.deltaTime * writerSpeed;
-        _textMesh.maxVisibleCharacters = (int)_writerProgress;
-    }
+        _animator.Dispose();
+    } */
 }

@@ -1,16 +1,12 @@
 using System.Collections.Generic;
-using MyFirstVisualNovel.Runtime.Core.UI;
-using MyFirstVisualNovel.Runtime.VNGameplay;
+using SosalkasGame.Runtime.Core;
+using SosalkasGame.Runtime.Core.GameEntryPoint;
+using SosalkasGame.Runtime.VNGameplay;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameFSM
+namespace SosalkasGame.Runtime.Core.GameFSM
 {
     public class GameStateModel
     {
-        public AssetStorage.AssetStorage AssetStorage;
-        public SceneLoader.SceneLoader SceneLoader;
-        public ActionMap ActionMap;
-        public UIRoot UIRoot;
-
         public string ScenarioConfigPath;
         public string[][] VariablesTable;
         public string[][] ScenarioTable;

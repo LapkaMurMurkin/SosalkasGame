@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MyFirstVisualNovel.Runtime.Core.UI
+namespace SosalkasGame.Runtime.Core
 {
     public class UIRoot : MonoBehaviour
     {

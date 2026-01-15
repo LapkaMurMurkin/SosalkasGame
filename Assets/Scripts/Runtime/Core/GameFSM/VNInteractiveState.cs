@@ -1,41 +1,41 @@
 
 using System;
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
-using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core;
 using SosalkasGame.Runtime.VNGameplay.VNInteractive;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using VContainer.Unity;
 
 namespace SosalkasGame.Runtime.Core.GameFSM
 {
     public class VNInteractiveState : VNGameplayState
     {
-        public TestInteractive Interactive { get; private set; }
-        public Action<TestInteractive> InteractiveLoaded;
+        private TestInteractiveLifeTimeScope _testInteractiveLifeTimeScope;
+        //public Action<TestInteractive> InteractiveLoaded;
 
-        public VNInteractiveState(MyFirstVisualNovel.Runtime.Core.GameFSM.GameFSM fsm, GameStateModel model) : base(fsm, model)
+        public VNInteractiveState(SosalkasGame.Runtime.Core.GameFSM.GameFSM fsm, GameStateModel model) : base(fsm, model)
         {
 
         }
 
         public override void Enter()
         {
-            Interactive = this._model.AssetStorage.InstantiateAsset<TestInteractive>(this._model.CurrentFrame.Interactive[0]);
-            Interactive.Initialize(this);
-            Interactive.InteractionEnded += EndInteraction;
-            InteractiveLoaded.Invoke(Interactive);
+            //Interactive = this._fsm.AssetStorage.InstantiateAsset<TestInteractive>(this._model.CurrentFrame.Interactive[0]);
+            _testInteractiveLifeTimeScope = this._fsm.GameLifetimeScope.CreateChild<TestInteractiveLifeTimeScope>();
+            _testInteractiveLifeTimeScope.InteractionEnded += EndInteraction;
         }
 
         public override void Exit()
         {
-            Interactive.InteractionEnded -= EndInteraction;
-            GameObject.Destroy(Interactive.gameObject);
+            _testInteractiveLifeTimeScope.InteractionEnded -= EndInteraction;
         }
 
         public override void Update() { }
 
         private void EndInteraction()
         {
+            _testInteractiveLifeTimeScope.Dispose();
             this._fsm.SwitchStateTo<VNReadingState>();
         }
     }

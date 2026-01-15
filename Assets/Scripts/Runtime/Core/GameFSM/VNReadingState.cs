@@ -1,14 +1,14 @@
 using System.Linq;
 using Extensions;
-using MyFirstVisualNovel.Runtime.Core.UI;
-using MyFirstVisualNovel.Runtime.VNGameplay;
+using SosalkasGame.Runtime.Core;
+using SosalkasGame.Runtime.VNGameplay;
 using SosalkasGame.Runtime.Core.GameFSM;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 using static ActionMap;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameFSM
+namespace SosalkasGame.Runtime.Core.GameFSM
 {
     public class VNReadingState : VNGameplayState
     {
@@ -21,9 +21,9 @@ namespace MyFirstVisualNovel.Runtime.Core.GameFSM
 
         public VNReadingState(GameFSM fsm, GameStateModel model) : base(fsm, model)
         {
-            _mainInput = this._model.ActionMap.MainInput;
-            _leftClick = this._model.ActionMap.MainInput.LeftClick;
-            _rightClick = this._model.ActionMap.MainInput.RightClick;
+            _mainInput = this._fsm.ActionMap.MainInput;
+            _leftClick = this._fsm.ActionMap.MainInput.LeftClick;
+            _rightClick = this._fsm.ActionMap.MainInput.RightClick;
             //_defaultFontSettings = "<color=blue>";
         }
 

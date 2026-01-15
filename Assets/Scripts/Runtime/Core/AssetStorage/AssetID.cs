@@ -1,4 +1,4 @@
-namespace MyFirstVisualNovel.Runtime.Core.AssetStorage
+namespace SosalkasGame.Runtime.Core.AssetStorage
 {
     public class AssetID
     {
@@ -12,6 +12,6 @@ namespace MyFirstVisualNovel.Runtime.Core.AssetStorage
         public const string VN_GAMEPLAY_UI = "VNGameplayUI";
 
         //Interactive
-        public const string TEST_INTERACTIVE = "TestInteractive";
+        public const string TEST_INTERACTIVE_UI = "TestInteractiveUI";
     }
 }

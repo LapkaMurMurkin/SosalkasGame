@@ -1,6 +1,6 @@
 using Extensions;
 
-using MyFirstVisualNovel.Runtime.Core.SceneLoader;
+using SosalkasGame.Runtime.Core.SceneLoader;
 
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MyFirstVisualNovel.Editor
+namespace SosalkasGame.Editor
 {
     [InitializeOnLoad]
     public class AutoBoot

@@ -1,14 +1,14 @@
 using System;
 
-using MyFirstVisualNovel.Runtime.Core.AssetStorage;
-using MyFirstVisualNovel.Runtime.Core.SceneLoader;
-using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core.AssetStorage;
+using SosalkasGame.Runtime.Core.SceneLoader;
+using SosalkasGame.Runtime.Core;
 
 using UnityEngine;
 
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameEntryPoint
+namespace SosalkasGame.Runtime.Core.GameEntryPoint
 {
     public class GameEntryPoint : IInitializable, IDisposable
     {
@@ -43,7 +43,7 @@ namespace MyFirstVisualNovel.Runtime.Core.GameEntryPoint
         private async void LoadGame()
         {
             await _assetStorage.LoadAssetsByLable(AssetID.GROUP_ROOT);
-            await _sceneLoader.LoadScene(SceneID.MAIN_MENU);
+            await _sceneLoader.LoadSceneAsync(SceneID.MAIN_MENU);
         }
     }
 }

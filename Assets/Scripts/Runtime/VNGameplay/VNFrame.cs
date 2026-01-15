@@ -1,4 +1,4 @@
-namespace MyFirstVisualNovel.Runtime.VNGameplay
+namespace SosalkasGame.Runtime.VNGameplay
 {
     public class VNFrame
     {

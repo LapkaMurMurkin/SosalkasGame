@@ -1,39 +1,42 @@
 using System;
+using System.Collections.Generic;
 using Extensions;
 using SosalkasGame.Runtime.Core.GameFSM;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static ActionMap;
 
 namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
 {
-    public class TestInteractive : MonoBehaviour
+    public class TestInteractive
     {
-        private VNInteractiveState _state;
-        public Button TestButton;
+        private TestInteractiveEntryPoint _testInteractiveEntryPoint;
 
-        private int _crackCout;
-
-        public Action InteractionEnded;
-
-        public void Initialize(VNInteractiveState state)
+        public TestInteractive(TestInteractiveEntryPoint testInteractiveEntryPoint)
         {
-            _state = state;
-            TestButton.onClick.AddListener(CrackStep);
+            _testInteractiveEntryPoint = testInteractiveEntryPoint;
         }
 
-        public void OnDestroy()
+        public bool CheckIsImageClicked(Collider2D collider, out Image image)
         {
-            TestButton.onClick.RemoveAllListeners();
+            image = null;
+
+            if (collider is null)
+                return false;
+
+            if (collider.TryGetComponent<Image>(out image) is false)
+                return false;
+
+            image.enabled = true;
+            collider.enabled = false;
+            return true;
         }
 
-        private void CrackStep()
+        public void EndInteraction()
         {
-            DOTweenAnimator.ShakePosition(TestButton.transform, 1f, 20);
-            _state.LoadNextFrame(false);
-            _crackCout++;
-            if (_crackCout >= 3)
-                InteractionEnded.Invoke();
+            _testInteractiveEntryPoint.EndInteraction();
         }
     }
 }

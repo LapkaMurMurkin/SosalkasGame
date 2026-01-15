@@ -1,8 +1,8 @@
-using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core;
 
 using Templates.FSM;
 
-namespace MyFirstVisualNovel.Runtime.Core.GameFSM
+namespace SosalkasGame.Runtime.Core.GameFSM
 {
     public abstract class GameFSMState : FSMState
     {

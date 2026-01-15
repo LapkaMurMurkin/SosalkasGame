@@ -27,7 +27,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - root
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: be59dda449dc6594ea431f0e132a3375
+  - m_GUID: f727b46d7a46fd94883230d27334f603
     m_Address: MainMenuUI
     m_ReadOnly: 0
     m_SerializedLabels:

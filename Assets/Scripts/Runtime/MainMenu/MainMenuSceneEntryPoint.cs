@@ -1,15 +1,15 @@
 using System;
 
-using MyFirstVisualNovel.Runtime.Core.AssetStorage;
-using MyFirstVisualNovel.Runtime.Core.GameFSM;
-using MyFirstVisualNovel.Runtime.Core.SceneLoader;
-using MyFirstVisualNovel.Runtime.Core.UI;
+using SosalkasGame.Runtime.Core.AssetStorage;
+using SosalkasGame.Runtime.Core.GameFSM;
+using SosalkasGame.Runtime.Core.SceneLoader;
+using SosalkasGame.Runtime.Core;
 
 using UnityEngine;
 
 using VContainer.Unity;
 
-namespace MyFirstVisualNovel.Runtime.MainMenu
+namespace SosalkasGame.Runtime.MainMenu
 {
     public class MainMenuSceneEntryPoint : IInitializable, IDisposable
     {
