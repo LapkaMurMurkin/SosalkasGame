@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static ActionMap;
 
-namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
+namespace SosalkasGame.Runtime.VNGameplay.VNInteractivity
 {
     public class TestInteractive
     {

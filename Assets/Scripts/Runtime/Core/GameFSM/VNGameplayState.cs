@@ -41,7 +41,7 @@ namespace SosalkasGame.Runtime.Core.GameFSM
             if (frame.Choice is not null)
                 this._fsm.SwitchStateTo<VNChoiceState>();
             if (frame.Interactive is not null)
-                this._fsm.SwitchStateTo<VNInteractiveState>();
+                this._fsm.SwitchStateTo<VNInteractivityState>();
 
             return frame;
         }

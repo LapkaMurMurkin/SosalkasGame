@@ -8,10 +8,11 @@ namespace SosalkasGame.Runtime.Core.AssetStorage
 
         //UI
         public const string UI_ROOT = "UIRoot";
-        public const string MAIN_MENU_UI = "MainMenuUI";
-        public const string VN_GAMEPLAY_UI = "VNGameplayUI";
+        public const string UI_MAIN_MENU = "MainMenuUI";
+        public const string UI_VN_GAMEPLAY = "VNGameplayUI";
 
-        //Interactive
-        public const string TEST_INTERACTIVE_UI = "TestInteractiveUI";
+        //Interactivity
+        public const string UI_TEST_INTERACTIVE = "TestInteractiveUI";
+        public const string INTV_STARS_BIRTH_1 = "StarsBirth1";
     }
 }

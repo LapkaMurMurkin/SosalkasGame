@@ -10,13 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Interactive
+  m_Name: Interactivity
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Interactive
+  m_GroupName: Interactivity
   m_GUID: 732a0fdd26336774e82c9fd929e85be5
   m_SerializeEntries:
+  - m_GUID: 523141f2ec9833544acc206e84666582
+    m_Address: StarsBirth2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - root
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54c74e4c60c2c644693d573447c56110
     m_Address: TestInteractiveUI
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - root
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0548c0f9eb608e47a29b2480c0e2b49
+    m_Address: StarsBirth1
     m_ReadOnly: 0
     m_SerializedLabels:
     - root

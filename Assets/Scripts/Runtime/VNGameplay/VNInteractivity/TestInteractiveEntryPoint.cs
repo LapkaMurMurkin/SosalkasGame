@@ -5,7 +5,7 @@ using SosalkasGame.Runtime.Core.GameFSM;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
+namespace SosalkasGame.Runtime.VNGameplay.VNInteractivity
 {
     public class TestInteractiveEntryPoint : IInitializable, IDisposable
     {
@@ -22,7 +22,7 @@ namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
             _testInteractiveLifeTimeScope = testInteractiveLifeTimeScope;
             _gameFSM = gameFSM;
             _testInteractive = new TestInteractive(this);
-            _testInteractiveUI = assetStorage.InstantiateAsset<TestInteractiveUI>(AssetID.TEST_INTERACTIVE_UI);
+            _testInteractiveUI = assetStorage.InstantiateAsset<TestInteractiveUI>(AssetID.UI_TEST_INTERACTIVE);
             _assetStorage = assetStorage;
             _actionMap = actionMap;
             _uiRoot = uiRoot;
@@ -30,7 +30,7 @@ namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
 
         public void Initialize()
         {
-            _testInteractiveUI.Initialize(_gameFSM.GetState<VNInteractiveState>(), _testInteractive, _actionMap);
+            _testInteractiveUI.Initialize(_gameFSM.GetState<VNInteractivityState>(), _testInteractive, _actionMap);
             _uiRoot.AddScreen(_testInteractiveUI.gameObject);
         }
 

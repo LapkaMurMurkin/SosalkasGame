@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
+namespace SosalkasGame.Runtime.VNGameplay.VNInteractivity
 {
     public class TestInteractiveUI : MonoBehaviour
     {
-        private VNInteractiveState _state;
+        private VNInteractivityState _state;
         private TestInteractive _presenter;
         private ActionMap _actionMap;
         [SerializeField]
@@ -17,7 +17,7 @@ namespace SosalkasGame.Runtime.VNGameplay.VNInteractive
 
         private int _crackCout;
 
-        public void Initialize(VNInteractiveState state, TestInteractive presenter, ActionMap actionMap)
+        public void Initialize(VNInteractivityState state, TestInteractive presenter, ActionMap actionMap)
         {
             _state = state;
             _presenter = presenter;

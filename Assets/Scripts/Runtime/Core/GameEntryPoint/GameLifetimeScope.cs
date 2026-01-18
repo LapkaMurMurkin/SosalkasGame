@@ -5,31 +5,32 @@ using UnityEngine;
 
 using VContainer;
 using VContainer.Unity;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace SosalkasGame.Runtime.Core.GameEntryPoint
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        [SerializeField] UIRoot _uiRoot;
+        /*         [SerializeField]
+                private UIRoot _uiRoot; */
 
         protected override void Configure(IContainerBuilder builder)
         {
-            GameObject.DontDestroyOnLoad(this.gameObject);
+            //GameObject.DontDestroyOnLoad(this.gameObject);
 
             //Core
             builder.RegisterEntryPoint<GameEntryPoint>();
             builder.Register<GameStateModel>(Lifetime.Singleton);
             builder.Register<GameFSM.GameFSM>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            /*             builder.Register<MainMenuState>(Lifetime.Singleton);
-                        builder.Register<VNScenarioLoadingState>(Lifetime.Singleton);
-                        builder.Register<VNGameplayState>(Lifetime.Singleton); */
-
 
             builder.Register<AssetStorage.AssetStorage>(Lifetime.Singleton);
             builder.Register<SceneLoader.SceneLoader>(Lifetime.Singleton);
             builder.Register<ActionMap>(Lifetime.Singleton);
 
-            builder.RegisterComponentInNewPrefab<UIRoot>(_uiRoot, Lifetime.Singleton).DontDestroyOnLoad();
+            builder.RegisterComponentInHierarchy<UIRoot>();
+            builder.RegisterComponentInHierarchy<GraphicRaycaster>();
+            builder.RegisterComponentInHierarchy<EventSystem>();
         }
     }
 }

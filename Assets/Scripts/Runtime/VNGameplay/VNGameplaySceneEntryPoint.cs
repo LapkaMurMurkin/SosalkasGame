@@ -4,7 +4,7 @@ using SosalkasGame.Runtime.Core.AssetStorage;
 using SosalkasGame.Runtime.Core.GameFSM;
 using SosalkasGame.Runtime.Core.SceneLoader;
 using SosalkasGame.Runtime.Core;
-using SosalkasGame.Runtime.VNGameplay.VNInteractive;
+using SosalkasGame.Runtime.VNGameplay.VNInteractivity;
 
 using UnityEngine;
 
@@ -21,14 +21,14 @@ namespace SosalkasGame.Runtime.VNGameplay
         private readonly UIRoot _uiRoot;
         private readonly VNGameplayUI _vnGameplayUI;
 
-        public VNGameplaySceneEntryPoint(GameStateModel model, AssetStorage assetStorage, SceneLoader sceneLoader, GameFSM gameState, UIRoot uiRoot)
+        public VNGameplaySceneEntryPoint(GameStateModel model, AssetStorage assetStorage, SceneLoader sceneLoader, GameFSM gameState, UIRoot uiRoot, VNGameplayUI vnGameplayUI)
         {
             _model = model;
             _assetStorage = assetStorage;
             _sceneLoader = sceneLoader;
             _gameState = gameState;
             _uiRoot = uiRoot;
-            _vnGameplayUI = _assetStorage.InstantiateAsset<VNGameplayUI>(AssetID.VN_GAMEPLAY_UI);
+            _vnGameplayUI = vnGameplayUI;
         }
 
         public void Initialize()

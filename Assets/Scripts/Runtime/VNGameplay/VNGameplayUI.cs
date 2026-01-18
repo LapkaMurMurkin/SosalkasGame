@@ -16,6 +16,7 @@ namespace SosalkasGame.Runtime.VNGameplay
         private VNFrame _loadedFrame;
 
         public RawImage BackgroundImage;
+        public GameObject InteractivityLayer;
         public RawImage CharacterImage;
         public TextMeshProUGUI CharacterName;
         public TextMeshProUGUI MainText;

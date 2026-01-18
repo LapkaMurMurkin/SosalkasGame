@@ -33,7 +33,7 @@ namespace SosalkasGame.Runtime.Core.GameFSM
             this.InitializeState(new VNScenarioLoadingState(this, _model));
             this.InitializeState(new VNReadingState(this, _model));
             this.InitializeState(new VNChoiceState(this, _model));
-            this.InitializeState(new VNInteractiveState(this, _model));
+            this.InitializeState(new VNInteractivityState(this, _model));
         }
 
         public void Tick()

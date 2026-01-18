@@ -105,7 +105,7 @@ namespace SosalkasGame.Runtime.Core.GameFSM
                     anchors.Add(newFrame.AnchorID, frames.Count); // "frames.Count" it's frame index+1, before adding new frame
                 },
                 ["JUMP"] = (string value) => newFrame.JumpToAnchorID = value,
-                ["INTERACTIVE"] = (string value) => newFrame.Interactive = value.Split("\n"),
+                ["INTERACTIVITY"] = (string value) => newFrame.Interactive = value.Split("\n"),
                 [">"] = (string value) =>
                 {
                     newFrame.MainText = value;

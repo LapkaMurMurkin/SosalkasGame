@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace SosalkasGame.Runtime.Core
 {
     public class UIRoot : MonoBehaviour
     {
-        [field: SerializeField] public GameObject Screens { get; private set; }
-        [field: SerializeField] public GameObject PopUps { get; private set; }
+        [field: SerializeField] public GraphicRaycaster GraphicRaycaster { get; private set;}
+        [field: SerializeField] public EventSystem EventSystem { get; private set;}
+
+        [field: SerializeField] public GameObject Screens { get; private set;}
+        [field: SerializeField] public GameObject PopUps { get; private set;}
         [SerializeField] private GameObject _loadingScreen;
 
         public void AddScreen(GameObject screen, bool enabled = true)
